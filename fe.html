@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Music Collection</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #0f172a, #1e293b, #111827);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+        color: white;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 950px;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 25px;
+        padding: 40px;
+        box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      .top-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+
+      .form-section,
+      .saved-section {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 25px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 35px;
+        font-size: 38px;
+        font-weight: 700;
+        color: #f8fafc;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #e2e8f0;
+      }
+
+      .input-group {
+        margin-bottom: 22px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 15px;
+        font-weight: 500;
+        color: #cbd5e1;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+        font-size: 15px;
+        outline: none;
+        transition: 0.3s;
+        border: 1px solid transparent;
+      }
+
+      #deleteSongs{
+        margin-top: 20px;
+      }
+
+      #deleteButton{
+        margin-top: 20px;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        color: #94a3b8;
+      }
+
+      input:focus,
+      textarea:focus {
+        border: 1px solid #38bdf8;
+        box-shadow: 0px 0px 15px rgba(56, 189, 248, 0.3);
+      }
+
+      textarea {
+        min-height: 220px;
+        resize: none;
+        line-height: 1.7;
+      }
+
+      button {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #38bdf8, #2563eb);
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .search-btn {
+        margin-top: 12px;
+        background: linear-gradient(135deg, #10b981, #059669);
+      }
+
+      .search-btn:hover {
+        box-shadow: 0px 8px 20px rgba(16, 185, 129, 0.4);
+      }
+
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0px 8px 20px rgba(37, 99, 235, 0.4);
+      }
+
+      .song-card {
+        background: rgba(255, 255, 255, 0.06);
+        padding: 18px;
+        border-radius: 15px;
+        margin-bottom: 15px;
+        border-left: 4px solid #38bdf8;
+      }
+
+      .song-card h3 {
+        color: #f8fafc;
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+
+      .song-card p {
+        color: #cbd5e1;
+        white-space: pre-line;
+        line-height: 1.6;
+      }
+
+      .empty {
+        color: #94a3b8;
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      .footer {
+        margin-top: 35px;
+        text-align: center;
+        color: #94a3b8;
+        font-size: 14px;
+      }
+
+      @media (max-width: 850px) {
+        .top-section {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 30px;
+        }
+
+        .container {
+          padding: 25px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎵 Music Collection</h1>
+
+      <div class="top-section">
+        <!-- FORM SECTION -->
+
+        <div class="form-section">
+          <h2>Add Songs</h2>
+
+          <div class="input-group">
+            <label>Username</label>
+
+            <input
+              type="text"
+              id="username"
+              placeholder="Enter your username"
+            />
+            
+            <label style="margin-top: 10px;">Password</label>
+
+            <input
+              type="text"
+              id="password"
+              placeholder="Enter your password"
+            />
+          </div>
+
+          <div class="input-group">
+            <label>Favorite Songs</label>
+
+            <textarea
+              id="favoriteSongs"
+              placeholder="Example:
+
+                1. Shape of You
+                2. Believer
+                3. Perfect"
+            ></textarea>
+          </div>
+
+          <button onclick="saveSongs()">Save Songs</button>
+          <button onclick="searchSongs()" class="search-btn">
+            Search User Songs
+          </button>
+        </div>
+
+        <!-- SAVED SONGS SECTION -->
+
+        <div class="saved-section">
+          <h2>Saved Collections</h2>
+
+          <div id="savedData">
+            <p id="songsSearched" class="empty">Not searched yet</p>
+          </div>
+          <input type="text"
+              id="deleteSongs"
+              placeholder="Perfect,Shape of you">
+          <button id="deleteButton" onclick="deleteSongs()">Delete Songs</button>
+        </div>
+      </div>
+
+      <div class="footer">Your personal music dashboard</div>
+    </div>
+
+    <script>
+      async function saveSongs() {
+        var songObject = {
+          username: document.getElementById("username").value,
+          songs: document.getElementById("favoriteSongs").value,
+        };
+        await fetch("/favSongs", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(songObject),
+        });
+      }
+      //    user created
+
+      async function searchSongs() {
+        var username = document.getElementById("username").value;
+        var obj = {
+          username: username,
+        };
+        var data = await fetch("/api/sendUserSongs", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(obj),
+        });
+        var jsonData = await data.json();
+
+        if (jsonData.response == "No songs found") {
+          document.getElementById("songsSearched").innerHTML = "No songs found";
+        } else {
+          var arr = jsonData.response;
+          console.log(arr);
+          document.getElementById("songsSearched").innerHTML = arr;
+        }
+      }
+
+      // delete songs
+      
+      async function deleteSongs(){
+        var username = document.getElementById("username").value;
+        var songsToDelete = document.getElementById("deleteSongs").value;
+
+        var jsonObject = {
+            "username" : username,
+            "deleteSongs" : songsToDelete
+        }
+
+        var data = await fetch("/api/deleteUserSongs", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(jsonObject),
+        });
+
+      }
+
+
+    </script>
+  </body>
+</html>
+
+<!-- Username password authentication -->
